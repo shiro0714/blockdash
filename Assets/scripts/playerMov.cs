@@ -21,13 +21,13 @@ public class playerMov : MonoBehaviour{
         if (Keyboard.current != null)
         {
             // Input voor "D" (Rechts)
-            if (Keyboard.current.dKey.isPressed)
+            if (Keyboard.current.dKey.isPressed || Keyboard.current.rightArrowKey.isPressed)
             {
                 rb.AddForce(sidewaysForce * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
-            }
+            }  
 
             // Input voor "A" (Links)
-            if (Keyboard.current.aKey.isPressed)
+            if (Keyboard.current.aKey.isPressed || Keyboard.current.leftArrowKey.isPressed)
             {
                 rb.AddForce(-sidewaysForce * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
             }
