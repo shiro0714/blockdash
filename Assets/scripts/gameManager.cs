@@ -1,4 +1,6 @@
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class gameManager : MonoBehaviour
@@ -10,9 +12,10 @@ public class gameManager : MonoBehaviour
 
     public GameObject completeLevelUI;
 
-    public void winLevel() { 
+    public void winLevel()
+    {
         completeLevelUI.SetActive(true);
-        
+
     }
     public void Endgame()
     {
@@ -26,6 +29,25 @@ public class gameManager : MonoBehaviour
 
     void Restart()
     {
-       SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+
+    void Update()
+    {
+        // Tip: .wasPressedThisFrame is beter dan .isPressed, 
+        // omdat hij dan maar één keer reageert per klik.
+        if (Keyboard.current.mKey.wasPressedThisFrame)
+        {
+            // 1. Sla de index van het HUIDIGE level op in het menu-script
+            menu.laatsteSceneIndex = SceneManager.GetActiveScene().buildIndex;
+
+            // 2. Ga daarna pas naar het menu (index 0)
+            SceneManager.LoadScene(0);
+        }
     }
 }
+
+
+    
+
