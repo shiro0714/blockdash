@@ -1,3 +1,4 @@
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -5,6 +6,14 @@ using UnityEngine.SceneManagement;
 
 public class gameManager : MonoBehaviour
 {
+
+    // 1. De static variabele die het aantal doden onthoudt over alle scenes heen
+    public static int dodenTeller = 0;
+
+    // 2. Een link naar de tekst op je scherm
+    public TextMeshProUGUI deathText;
+
+    public AudioSource deathSound;
 
     bool gameIsKlaar = false;
 
@@ -17,13 +26,36 @@ public class gameManager : MonoBehaviour
         completeLevelUI.SetActive(true);
 
     }
+
+    void Start()
+    {
+        UpdateDeathUI();
+    }
     public void Endgame()
     {
         if (gameIsKlaar == false)
         {
             gameIsKlaar = true;
             Debug.Log("Game Over");
+
+            dodenTeller++;
+            UpdateDeathUI();
+
+            if(deathSound != null)
+            {
+                deathSound.Play();
+            }
             Invoke("Restart", restartDelay);
+        }
+    }
+
+   
+
+    void UpdateDeathUI()
+    {
+        if (deathText != null)
+        {
+            deathText.text = "Deaths: " + dodenTeller;
         }
     }
 

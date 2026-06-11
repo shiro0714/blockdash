@@ -10,7 +10,11 @@ public class menu : MonoBehaviour
     public void startGame()
     {
         Debug.Log("start");
-        // Start altijd bij het eerste level (index 1)
+
+        // 1. Reset de statische teller direct, zonder het object te hoeven zoeken!
+        gameManager.dodenTeller = 0;
+
+        // 2. Laad de scene
         SceneManager.LoadScene(1);
     }
 
@@ -19,5 +23,6 @@ public class menu : MonoBehaviour
     {
         Debug.Log("Hervat vanaf level: " + laatsteSceneIndex);
         SceneManager.LoadScene(laatsteSceneIndex);
+
     }
 }
